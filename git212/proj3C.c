@@ -41,6 +41,9 @@ void Enqueue(Queue *q, char *val){
 		if (q->back == QUEUE_SIZE){
 			q->back = 0;
 		}
+		char *cop = malloc(sizeof(char) * strlen(val));
+		//q->strings[q->back] = val;
+		strcpy(cop, val);
 		q->strings[q->back] = val;
 		q->back = q->back + 1;
 	}
@@ -55,6 +58,7 @@ char *Front(Queue *q){
 
 
 char *Dequeue(Queue *q){
+	printf("%p\n", &q);
 	char *top;
 	if (q->num_elements == 0){
 		return "No more elements";
@@ -137,156 +141,6 @@ char *NewString(char *s)
 
 
 
-//int main(int argc, char *argv[])
-//{
-/***  STEP #1: Test your queue code.  ***/
-/*
- //This code:
-    Queue q;
-    InitializeQueue(&q);
-    PrintQueue(&q);
-    Enqueue(&q, "hello");
-    PrintQueue(&q);
-    Enqueue(&q, "world");
-    PrintQueue(&q);
-    printf("Dequeue: %s\n", Dequeue(&q));
-    PrintQueue(&q);
-*/
-/* Gives this output (with different pointers):
-Printing queue 0x7fff5e6878a8
-	The index for the front of the queue is 0
-	The index for the back of the queue is 0
-	The queue is empty.
-Printing queue 0x7fff5e6878a8
-	The index for the front of the queue is 0
-	The index for the back of the queue is 1
-		Entry[0] = "hello"
-Printing queue 0x7fff5e6878a8
-	The index for the front of the queue is 0
-	The index for the back of the queue is 2
-		Entry[0] = "hello"
-		Entry[1] = "world"
-Dequeue: hello
-Printing queue 0x7fff5e6878a8
-	The index for the front of the queue is 1
-	The index for the back of the queue is 2
-		Entry[1] = "world"
- */
-
-/*** STEP #2: read in from the input file (argc/argv stuff). 
-     NewString is likely helpful here.
- ***/
-/*	Queue femDon;
-	Queue malDon;
-	Queue femRec;
-	Queue malRec;
-	Queue Hospital;
-	int buff_size;
-    	char fLine[150];
-	FILE *f_in = fopen(argv[1], "r");
-
-    	//printf("%s", argv[1]);
-	if (f_in == NULL){
-    		exit(EXIT_FAILURE);
-    	}
-
-    	//while(!feof(f_in)){
-	while(fgets(fLine, 150, f_in) != NULL){
-		fgets(fLine, 150, f_in);
-		char *strlin = NewString(fLine)
-		//fgets(fLine, 50, f_in);
-		//printf("%s", fLine);
-		
-		if ((fLine[0] == 'D' && fLine[2] == 'F')){
-			//printf("%s", fLine);
-					
-			Enqueue(&femDon,fLine);
-			if (femRec.num_elements > 0 && Hospital.num_elements > 0){
-			       char *hosp = Dequeue(&Hospital);
-			       char *recip = Dequeue(&femRec);
-			       char *donor = Dequeue(&femDon);
-    			       printf("MATCH: %s donates to %s at hospital %s\n", donor, recip, hosp);
-			
-			}
-		}
-		if ((fLine[0] == 'D' && fLine[2] == 'M')){
-			//printf("%s", fLine);
-			
-			Enqueue(&malDon,fLine);
-			if (malRec.num_elements > 0 && Hospital.num_elements > 0){
-				char *hosp = Dequeue(&Hospital);
-				char *recip = Dequeue(&malRec);
-				char *donor = Dequeue(&malDon);
-    				printf("MATCH: %s donates to %s at hospital %s\n", donor, recip, hosp);
-			}	
-		}
-		if ((fLine[0] == 'R' && fLine[2] == 'F')){
-			//printf("%s", fLine);
-			
-			Enqueue(&femRec,fLine);
-			if (femDon.num_elements > 0 && Hospital.num_elements > 0){
-				char *hosp = Dequeue(&Hospital);
-				char *recip = Dequeue(&femRec);
-				char *donor = Dequeue(&femDon);
-    				printf("MATCH: %s donates to %s at hospital %s\n", donor, recip, hosp);
-			}
-		}
-		if ((fLine[0] == 'R' && fLine[2] == 'M')){
-			//printf("%s", fLine);
-			
-			Enqueue(&malRec,fLine);
-			if (femDon.num_elements > 0 && Hospital.num_elements > 0){
-				char *hosp = Dequeue(&Hospital);
-				char *recip = Dequeue(&malRec);
-				char *donor = Dequeue(&malDon);
-    				printf("MATCH: %s donates to %s at hospital %s\n", donor, recip, hosp);
-			}
-		}
-		if (fLine[0] == 'H'){
-			//printf("%s", fLine);
-			
-			Enqueue(&Hospital,fLine);
-			if ((femRec.num_elements > 0) && (femDon.num_elements > 0) || (malRec.num_elements > 0) && (malDon.num_elements > 0)){
-				char *hosp = Dequeue(&Hospital);
-				char *recip = Dequeue(&femRec);
-				char *donor = Dequeue(&femDon);
-    				printf("MATCH: %s donates to %s at hospital %s\n", donor, recip, hosp);
-			}
-		}
-		if (fLine == NULL){
-			int x = 0;
-		}
-		    	}	
-
-    
-
-	fclose(f_in);
-	}
-  */  	
-/*** STEP #3: *after* your queue code works and *after* you can read the file, 
-     implement the prompt ***/
-/* Here are some helpful lines of code:
- *
- *  My print statement for a match:
- *
-    printf("MATCH: %s donates to %s at hospital %s\n", donor, recip, hosp);
- *
- *
- *  My print statements for the contents of the queues at the end:
- *
-    PrettyPrintQueue(&female_donors, "female donors");
-    PrettyPrintQueue(&female_recipients, "female recipients");
-    PrettyPrintQueue(&male_donors, "male donors");
-    PrettyPrintQueue(&male_recipients, "male recipients");
-    PrettyPrintQueue(&hospitals, "hospitals");
- *
- */
-	//}
-	//
-	//
-	//
-
-
 int main(int argc, char *argv[])
 {
 /***  STEP #1: Test your queue code.  ***/
@@ -327,10 +181,191 @@ Printing queue 0x7fff5e6878a8
      NewString is likely helpful here.
  ***/
 	Queue femDon;
+	InitializeQueue(&femDon);
+	//printf("%p\n", &femDon);
 	Queue malDon;
+	InitializeQueue(&malDon);
+	//printf("%p\n", &malDon);
 	Queue femRec;
+	InitializeQueue(&femRec);
+	//printf("%p\n", &femRec);
 	Queue malRec;
+	InitializeQueue(&malRec);
+	//printf("%p\n", &malRec);
 	Queue Hospital;
+	InitializeQueue(&Hospital);
+	//printf("%p\n", &Hospital);
+	int buff_size;
+    	char fLine[150];
+	FILE *f_in = fopen(argv[1], "r");
+
+    	//printf("%s", argv[1]);
+	if (f_in == NULL){
+    		exit(EXIT_FAILURE);
+    	}
+
+    	while(!feof(f_in)){
+	//while(fgets(fLine, 150, f_in) != NULL){
+		fgets(fLine, 150, f_in);
+		char *strlin = NewString(fLine);
+		//printf("%s", fLine);
+		//fgets(fLine, 50, f_in);
+		//printf("%s", fLine);
+	 	//printf("%s\n", strlin);	
+		if ((fLine[0] == 'D' && fLine[2] == 'F')){
+			//printf("%s", fLine);
+					
+			Enqueue(&femDon,fLine);
+			if (femRec.num_elements > 0 && Hospital.num_elements > 0){
+			       char *hosp = Dequeue(&Hospital);
+			       //printf("%s", hosp);
+			       char *recip = Dequeue(&femRec);
+			       //printf("%s", recip);
+			       char *donor = Dequeue(&femDon);
+    			       //printf("%s", donor);
+			       printf("MATCH: %s donates to %s at hospital %s\n", donor, recip, hosp);
+			
+			}
+		}
+		if ((fLine[0] == 'D' && fLine[2] == 'M')){
+			//printf("%s", fLine);
+			
+			Enqueue(&malDon,fLine);
+			if (malRec.num_elements > 0 && Hospital.num_elements > 0){
+				char *hosp = Dequeue(&Hospital);
+			       //printf("%s", hosp);
+				char *recip = Dequeue(&malRec);
+			       //printf("%s", recip);
+				char *donor = Dequeue(&malDon);
+    			       //printf("%s", donor);
+    				printf("MATCH: %s donates to %s at hospital %s\n", donor, recip, hosp);
+			}	
+		}
+		if ((fLine[0] == 'R' && fLine[2] == 'F')){
+			//printf("%s", fLine);
+			
+			Enqueue(&femRec,fLine);
+			if (femDon.num_elements > 0 && Hospital.num_elements > 0){
+				char *hosp = Dequeue(&Hospital);
+			       //printf("%s", hosp);
+				char *recip = Dequeue(&femRec);
+			       //printf("%s", recip);
+				char *donor = Dequeue(&femDon);
+    			       //printf("%s", donor);
+    				printf("MATCH: %s donates to %s at hospital %s\n", donor, recip, hosp);
+			}
+		}
+		if ((fLine[0] == 'R' && fLine[2] == 'M')){
+			//printf("%s", fLine);
+			
+			Enqueue(&malRec,fLine);
+			if (femDon.num_elements > 0 && Hospital.num_elements > 0){
+				char *hosp = Dequeue(&Hospital);
+			       //printf("%s", hosp);
+				char *recip = Dequeue(&malRec);
+			       //printf("%s", recip);
+				char *donor = Dequeue(&malDon);
+    			       //printf("%s", donor);
+    				printf("MATCH: %s donates to %s at hospital %s\n", donor, recip, hosp);
+			}
+		}
+		if (fLine[0] == 'H'){
+			//printf("%s", fLine);
+			
+			Enqueue(&Hospital,fLine);
+			if ((femRec.num_elements > 0) && (femDon.num_elements > 0) || (malRec.num_elements > 0) && (malDon.num_elements > 0)){
+				char *hosp = Dequeue(&Hospital);
+			       //printf("%s", hosp);
+				char *recip = Dequeue(&femRec);
+			       //printf("%s", recip);
+				char *donor = Dequeue(&femDon);
+    			       //printf("%s", donor);
+    				printf("MATCH: %s donates to %s at hospital %s\n", donor, recip, hosp);
+			}
+		}
+		if (fLine == NULL){
+			int x = 0;
+		}
+		    	}	
+
+    
+
+	fclose(f_in);
+	}
+    	
+/*** STEP #3: *after* your queue code works and *after* you can read the file, 
+     implement the prompt ***/
+/* Here are some helpful lines of code:
+ *
+ *  My print statement for a match:
+ *
+    printf("MATCH: %s donates to %s at hospital %s\n", donor, recip, hosp);
+ *
+ *
+ *  My print statements for the contents of the queues at the end:
+ *
+    PrettyPrintQueue(&female_donors, "female donors");
+    PrettyPrintQueue(&female_recipients, "female recipients");
+    PrettyPrintQueue(&male_donors, "male donors");
+    PrettyPrintQueue(&male_recipients, "male recipients");
+    PrettyPrintQueue(&hospitals, "hospitals");
+ *
+ */
+	//}
+	//
+	//
+	//
+
+
+//int main(int argc, char *argv[])
+//{
+/***  STEP #1: Test your queue code.  ***/
+/*
+ //This code:
+    Queue q;
+    InitializeQueue(&q);
+    PrintQueue(&q);
+    Enqueue(&q, "hello");
+    PrintQueue(&q);
+    Enqueue(&q, "world");
+    PrintQueue(&q);
+    printf("Dequeue: %s\n", Dequeue(&q));
+    PrintQueue(&q);
+*/
+/* Gives this output (with different pointers):
+Printing queue 0x7fff5e6878a8
+	The index for the front of the queue is 0
+	The index for the back of the queue is 0
+	The queue is empty.
+Printing queue 0x7fff5e6878a8
+	The index for the front of the queue is 0
+	The index for the back of the queue is 1
+		Entry[0] = "hello"
+Printing queue 0x7fff5e6878a8
+	The index for the front of the queue is 0
+	The index for the back of the queue is 2
+		Entry[0] = "hello"
+		Entry[1] = "world"
+Dequeue: hello
+Printing queue 0x7fff5e6878a8
+	The index for the front of the queue is 1
+	The index for the back of the queue is 2
+		Entry[1] = "world"
+ */
+
+/*** STEP #2: read in from the input file (argc/argv stuff). 
+     NewString is likely helpful here.
+ ***/
+/*	Queue femDon;
+	InitializeQueue(&femDon);
+	Queue malDon;
+	InitializeQueue(&malDon);
+	Queue femRec;
+	InitializeQueue(&femRec);
+	Queue malRec;
+	InitializeQueue(&malRec);
+	Queue Hospital;
+	InitializeQueue(&Hospital);
 	int buff_size;
     	char fLine[150];
 	FILE *f_in = fopen(argv[1], "r");
@@ -347,7 +382,7 @@ Printing queue 0x7fff5e6878a8
 		//fgets(fLine, 50, f_in);
 		//printf("%s", fLine);
 		
-		if ((strlin[0] == 'D' && strlin[2] == 'F')){
+		if ((strlin[0] == 'D') && (strlin[2] == 'F')){
 			//printf("%s", fLine);
 					
 			Enqueue(&femDon,fLine);
@@ -359,7 +394,7 @@ Printing queue 0x7fff5e6878a8
 			
 			}
 		}
-		if ((strlin[0] == 'D' && strlin[2] == 'M')){
+		if ((strlin[0] == 'D') && (strlin[2] == 'M')){
 			//printf("%s", fLine);
 			
 			Enqueue(&malDon,fLine);
@@ -370,7 +405,7 @@ Printing queue 0x7fff5e6878a8
     				printf("MATCH: %s donates to %s at hospital %s\n", donor, recip, hosp);
 			}	
 		}
-		if ((strlin[0] == 'R' && strlin[2] == 'F')){
+		if ((strlin[0] == 'R') && (strlin[2] == 'F')){
 			//printf("%s", fLine);
 			
 			Enqueue(&femRec,fLine);
@@ -381,7 +416,7 @@ Printing queue 0x7fff5e6878a8
     				printf("MATCH: %s donates to %s at hospital %s\n", donor, recip, hosp);
 			}
 		}
-		if ((strlin[0] == 'R' && strlin[2] == 'M')){
+		if ((strlin[0] == 'R') && (strlin[2] == 'M')){
 			//printf("%s", fLine);
 			
 			Enqueue(&malRec,fLine);
@@ -396,15 +431,18 @@ Printing queue 0x7fff5e6878a8
 			//printf("%s", fLine);
 			
 			Enqueue(&Hospital,fLine);
-			if ((femRec.num_elements > 0) && (femDon.num_elements > 0) || (malRec.num_elements > 0) && (malDon.num_elements > 0)){
+			if ((femRec.num_elements > 0) && (femDon.num_elements > 0)){
 				char *hosp = Dequeue(&Hospital);
 				char *recip = Dequeue(&femRec);
 				char *donor = Dequeue(&femDon);
     				printf("MATCH: %s donates to %s at hospital %s\n", donor, recip, hosp);
 			}
-		}
-		if (fLine == NULL){
-			int x = 0;
+			if((malRec.num_elements > 0) && (malDon.num_elements > 0)){
+				char *hosp = Dequeue(&Hospital);
+				char *recip = Dequeue(&femRec);
+				char *donor = Dequeue(&femDon);
+    				printf("MATCH: %s donates to %s at hospital %s\n", donor, recip, hosp);
+			}
 		}
 		    	}	
 
@@ -412,7 +450,7 @@ Printing queue 0x7fff5e6878a8
 
 	fclose(f_in);
 	}
-    	
+ */   	
 /*** STEP #3: *after* your queue code works and *after* you can read the file, 
      implement the prompt ***/
 /* Here are some helpful lines of code:
